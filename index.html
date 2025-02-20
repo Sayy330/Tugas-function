@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Aplikasi Penjualan & Konversi Suhu</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(#6710c2, #440f50);
+  margin: 0;
+  color: #ffff;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container {
+  padding: 30px;
+  max-width: 450px;
+  text-align: center;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 600;
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #bdc3c7;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #fdfdfd;
+}
+
+button {
+  background: linear-gradient(135deg, #570695, #1e033c);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #320534, #090007);
+  transform: scale(1.05);
+}
+
+#resultDiscount, #resultTemperature, #resultCalculator {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+.ktp-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.ktp-card {
+  color: #090007;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: center;
+}
+
+.ktp-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.ktp-card h2 {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.ktp-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Diskon</h1>
+      <label for="price">Harga Produk:</label>
+      <input type="number" id="price" placeholder="Masukkan harga" />
+      <label for="discountCode">Kode Diskon:</label>
+      <select id="discountCode">
+        <option value="none">Tidak Ada Diskon</option>
+        <option value="5">Diskon 5%</option>
+        <option value="10">Diskon 10%</option>
+        <option value="20">Diskon 20%</option>
+      </select>
+      <button onclick="calculateDiscount()">Hitung Diskon</button>
+      <p id="resultDiscount"></p>
+    </div>
+
+    <div class="container">
+      <h1>Konversi Suhu</h1>
+      <label for="temperature">Masukkan suhu:</label>
+      <input type="number" id="temperature" placeholder="Masukkan suhu" />
+      <label for="unit">Pilih konversi:</label>
+      <select id="unit">
+        <option value="CtoF">Celsius ke Fahrenheit</option>
+        <option value="FtoC">Fahrenheit ke Celsius</option>
+        <option value="CtoK">Celsius ke Kelvin</option>
+        <option value="KtoC">Kelvin ke Celsius</option>
+        <option value="FtoK">Fahrenheit ke Kelvin</option>
+        <option value="KtoF">Kelvin ke Fahrenheit</option>
+      </select>
+      <button onclick="convertTemperature()">Konversi</button>
+      <p id="resultTemperature"></p>
+    </div>
+
+
+    <div class="container">
+      <h1>
+        Menghitung 2 buah angka
+      </h1>
+      <label for="num1">Angka Pertama:</label>
+      <input type="number" id="num1" placeholder="Masukkan angka pertama" />
+      <label for="operator">Masukan simbol</label>
+      <input type="text" id="operator" placeholder="Masukkan operator" />
+      <label for="num2">Angka Kedua:</label>
+      <input type="number" id="num2" placeholder="Masukkan angka kedua" />
+      <button onclick="calculate()">Hitung</button>
+      <p id="resultCalculator"></p>
+    </div>
+
+    <div class="container">
+      <h1>KTP</h1>
+      <label for="name">Nama:</label>
+      <input type="text" id="name" placeholder="Masukkan Nama" />
+      <label for="nik">NIK:</label>
+      <input type="text" id="nik" placeholder="Masukkan NIK" />
+      <label for="address">Alamat:</label>
+      <input type="text" id="address" placeholder="Masukkan Alamat" />
+      <label for="birth">Tempat/Tgl Lahir:</label>
+      <input type="text" id="birth" placeholder="Masukkan Tempat/Tgl Lahir" />
+      <button onclick="generateKTP()">Generate KTP</button>
+      
+      <div class="ktp-wrapper">
+        <div class="ktp-card" id="ktpCard">
+          <!-- <img src="#" alt="Foto Profil" /> -->
+          <h2 id="ktpName">Nama: -</h2>
+          <p id="ktpNik">NIK: -</p>
+          <p id="ktpAddress">Alamat: -</p>
+          <p id="ktpBirth">Tempat/Tgl Lahir: -</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Diskon
+      function calculateDiscount() {
+        const price = parseFloat(document.getElementById("price").value);
+        const discount = document.getElementById("discountCode").value;
+        let finalPrice = price;
+
+        if (!isNaN(price) && discount !== "none") {
+          finalPrice = price - (price * (parseFloat(discount) / 100));
+        }
+        
+        document.getElementById("resultDiscount").innerText = "Total Bayar: Rp " + finalPrice.toFixed(2);
+      }
+
+      // Tempratur
+      function convertTemperature() {
+        const value = parseFloat(document.getElementById("temperature").value);
+        const unit = document.getElementById("unit").value;
+        let result = '';
+
+        if (isNaN(value)) {
+          result = "Silakan masukkan suhu yang valid!";
+        } else {
+          switch (unit) {
+            case "CtoF": result = (value * 9/5) + 32 + " °F"; break;
+            case "FtoC": result = ((value - 32) * 5/9) + " °C"; break;
+            case "CtoK": result = (value + 273.15) + " K"; break;
+            case "KtoC": result = (value - 273.15) + " °C"; break;
+            case "FtoK": result = ((value - 32) * 5/9) + 273.15 + " K"; break;
+            case "KtoF": result = ((value - 273.15) * 9/5) + 32 + " °F"; break;
+          }
+        }
+
+        document.getElementById("resultTemperature").innerText = result;
+      }
+
+    //  kalkulator
+      function calculate() {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const operator = document.getElementById("operator").value;
+        const num2 = parseFloat(document.getElementById("num2").value);
+        let result;
+
+        switch (operator) {
+          case '+': result = num1 + num2; break;
+          case '-': result = num1 - num2; break;
+          case '*': result = num1 * num2; break;
+          case '/': result = num2 !== 0 ? num1 / num2 : "Tidak dapat membagi dengan nol"; break;
+          default: result = "Operator tidak valid";
+        }
+
+        document.getElementById("resultCalculator").innerText = "Hasil: " + result;
+      }
+
+      //  ktp 
+      function generateKTP() {
+        document.getElementById("ktpName").innerText = "Nama: " + document.getElementById("name").value;
+        document.getElementById("ktpNik").innerText = "NIK: " + document.getElementById("nik").value;
+        document.getElementById("ktpAddress").innerText = "Alamat: " + document.getElementById("address").value;
+        document.getElementById("ktpBirth").innerText = "Tempat/Tgl Lahir: " + document.getElementById("birth").value;
+      }
+    </script>
+  </body>
+</html>
